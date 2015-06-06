@@ -15,18 +15,42 @@
 	var Man = Backbone.Model.extend({
 		initialize: function(){
 			alert("Hey, you creat me!");
+			//初始化时绑定监听,change事件会先于validate发生
+			this.bind("change: name", function(){
+				var name = this.get("name");
+				alert("你改变了name的属性为：" + name);
+			});
+			this.bind("invalid", function(model, error){
+				alert(error);
+			});
 		},
 		//对象赋值的一种方法，直接定义，设置默认值
 		defaults: {
 			name: '张三',
 			age: '38'
 		},
+		validate:function(attributes){
+			if(attributes.name = ""){
+				return "name不能为空！";
+			}
+		},
+		//设置方法，值是function
 		aboutMe: function(){
 			return 'My name is ' + this.get('name') +' ,' + this.get('age') + ' years old';
 		}
 	});
 	var man = new Man;
-	alert(man.aboutMe());
+	//这种方式添加错误处理也行
+	//man.on('invalid', function(){
+	//	alert(error);
+	//});
+	
+	man.set({name:''});//默认set时不进行验证
+	//手动触发验证,set时会触发
+	//man.set({name: ''}, {'validate': true}); 
+	//save时触发验证。根据验证规则，弹出错误提示。
+	man.save();
+
 
 	//赋值的时候定义
 	var Woman = Backbone.Model.extend({
