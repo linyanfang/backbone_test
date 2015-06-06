@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<button id ="check">新手报到</button>
+<ul id="world-list"></ul>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>	
+<script>
+	(function($){
+		World = Backbone.Model.extend({
+			//创建一个world的对象，拥有name属性
+			name:null
+		});
+
+		Worlds = Backbone.Collection.extend({
+			//world对象的集合
+			initialize: function (models, options){
+				this.bind("add",
+				options.view.addOneWorld);
+			}
+		});
+
+		AppView = Backbone.View.extend({
+			el: $("body"),
+			initialize: function(){
+				this.worlds = new Worlds(null, {view: this});
+			},
+			events: {
+				"click #check": "checkIn",  //事件绑定，绑定Dom中id为check的元素
+			},
+			checkIn: function(){
+				var world_name = prompt("请问你有事吗");
+				if(world_name == "") world_name = "未知";
+				var world = new World({name: world_name});
+				this.worlds.add(world);
+			},
+			addOneWorld: function(model){
+				$("#world-list").append("<li>这是来自逼东的问候<b>" + model.get('name') + "</b></li>");
+			}
+		});
+		//实例化AppView
+		var appview = new AppView;
+	})(jQuery);
+</script>
+</body>
+</html>

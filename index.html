@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Model</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/backbone.js"></script>
+</head>
+<body>
+<button>click</button>
+<script>
+(function($){
+
+	var Man = Backbone.Model.extend({
+		initialize: function(){
+			alert("Hey, you creat me!");
+		},
+		//对象赋值的一种方法，直接定义，设置默认值
+		defaults: {
+			name: '张三',
+			age: '38'
+		},
+		aboutMe: function(){
+			return 'My name is ' + this.get('name') +' ,' + this.get('age') + ' years old';
+		}
+	});
+	var man = new Man;
+	alert(man.aboutMe());
+
+	//赋值的时候定义
+	var Woman = Backbone.Model.extend({
+		initialize: function(){
+			var button = document.getElementsByTagName("button");
+		}
+	});
+	var woman = new Woman;
+	woman.set({name: 'lyf', age: '100'});
+	console.log(woman.get('name'));
+
+})(jQuery);
+</script>
+</body>
+</html>
