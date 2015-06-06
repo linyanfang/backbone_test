@@ -28,6 +28,7 @@
 		AppView = Backbone.View.extend({
 			el: $("body"),
 			initialize: function(){
+				//构造函数，实例化一个World集合类
 				this.worlds = new Worlds(null, {view: this});
 			},
 			events: {
