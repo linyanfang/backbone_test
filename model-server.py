@@ -12,7 +12,7 @@ urls = (
 
 class index:
     def GET(self):
-        t = Template(filename='02-backbonejs-model.html', input_encoding='utf-8')
+        t = Template(filename='model_man.html', input_encoding='utf-8')
         return t.render()
 
 class Man:
