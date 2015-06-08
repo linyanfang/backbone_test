@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>router app test</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/backbone.js"></script>
+</head>
+<body>
+<a href="#actions">testActions</a>
+<a href="#/posts/120">Post 120</a>
+<script type="text/javascript">
+var AppRouter = Backbone.Router.extend({
+	routes: {
+		//:把#后面的位置作为参数
+		"posts/:id": "getPost",
+		//*可以匹配所有的url
+		"*actions": "defaultRoute"
+	},
+
+	getPost: function(id){
+		alert(id);
+	},
+
+	defaultRoute: function(actions){
+		alert(actions);
+	}
+});
+
+var app_router = new AppRouter;
+//调用这个方法来初始化这个Router
+Backbone.history.start();
+
+</script>
+
+	
+</body>
+</html>
