@@ -26,20 +26,23 @@
 
   </div>
 
+  <div id="instructions">
+    double click to create a todo.
+  </div>
+
   <script src="../js/jquery.js"></script>
   <script src="../js/underscore.js"></script>
   <script src="../js/backbone.js"></script>
   <script src="todo.js"></script>
 
   <!-- Templates -->
-
   <script type="text/template" id="item-template">
-    <div class="view">
-      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+  <div class="view">
+     <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
       <label><%- title %></label>
       <a class="destroy"></a>
-    </div>
-    <input class="edit" type="text" value="<%- title %>" />
+  </div>
+  <input class="edit" type="text" value="<%- title %>" />
   </script>
 
   <script type="text/template" id="stats-template">
@@ -48,5 +51,6 @@
     <% } %>
     <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
   </script>
+
 </body>
 </html>
