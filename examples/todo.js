@@ -70,5 +70,34 @@ $(function(){
       return this;
     },  
 
-  })
+    toggleDone: function(){
+      this.model.toggle();
+    },
+
+    edit: function(){
+      this.$el.addClass("editing");
+      this.input.focus();
+    },
+
+    close: function(){
+      var value = this.input.val();
+      if(!value){
+        this.clear();
+      }else{
+        this.model.save({title: value});
+        this.$el.removeClass("editing");
+      }
+    },
+
+    updateOnEnter: function(){
+      if(e.keyCode == 13) this.close();
+    },
+
+    close: function(){
+      this.model.destroy();
+    }
+
+  });
+
+  
 })
